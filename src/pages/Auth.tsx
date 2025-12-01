@@ -17,16 +17,8 @@ const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  useEffect(() => {
-    // Check if user is already logged in
-    const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        navigate('/');
-      }
-    };
-    checkUser();
-  }, [navigate]);
+  // Removed automatic redirect - let the Index page handle this
+  // to prevent navigation flickering
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,9 +42,14 @@ const Auth = () => {
         });
       } else {
         toast({
-          title: "Check your email",
-          description: "We've sent you a confirmation link to complete your registration."
+          title: "Account created successfully",
+          description: "You can now sign in with your credentials."
         });
+        // Switch to sign in tab after successful signup
+        setTimeout(() => {
+          const signInTab = document.querySelector('[value="signin"]') as HTMLElement;
+          signInTab?.click();
+        }, 1500);
       }
     } catch (error) {
       toast({
@@ -82,6 +79,8 @@ const Auth = () => {
           variant: "destructive"
         });
       } else {
+        // Clear demo mode when signing in
+        localStorage.removeItem('finance-tracker-demo-mode');
         navigate('/');
       }
     } catch (error) {

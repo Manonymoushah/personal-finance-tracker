@@ -29,6 +29,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
+        // Clear demo mode when user successfully authenticates
+        if (session?.user && isDemoMode()) {
+          localStorage.removeItem('finance-tracker-demo-mode');
+        }
         setLoading(false);
       }
     );

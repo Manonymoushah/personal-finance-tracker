@@ -216,7 +216,12 @@ const FinanceDashboard = () => {
   };
 
   const handleSignOut = async () => {
+    // Clear demo mode
+    localStorage.removeItem('finance-tracker-demo-mode');
+    // Sign out if authenticated
     await signOut();
+    // Navigate to auth page
+    navigate('/auth');
   };
 
   return (
