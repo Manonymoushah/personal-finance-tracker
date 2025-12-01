@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import { IndianRupee, Eye } from 'lucide-react';
-import { setDemoMode } from '@/lib/localStorageAdapter';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { IndianRupee, Eye } from "lucide-react";
+import { setDemoMode } from "@/lib/localStorageAdapter";
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -30,24 +30,26 @@ const Auth = () => {
         email,
         password,
         options: {
-          emailRedirectTo: redirectUrl
-        }
+          emailRedirectTo: redirectUrl,
+        },
       });
 
       if (error) {
         toast({
           title: "Sign up failed",
           description: error.message,
-          variant: "destructive"
+          variant: "destructive",
         });
       } else {
         toast({
           title: "Account created successfully",
-          description: "You can now sign in with your credentials."
+          description: "You can now sign in with your credentials.",
         });
         // Switch to sign in tab after successful signup
         setTimeout(() => {
-          const signInTab = document.querySelector('[value="signin"]') as HTMLElement;
+          const signInTab = document.querySelector(
+            '[value="signin"]'
+          ) as HTMLElement;
           signInTab?.click();
         }, 1500);
       }
@@ -55,7 +57,7 @@ const Auth = () => {
       toast({
         title: "An error occurred",
         description: "Please try again later.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -69,25 +71,25 @@ const Auth = () => {
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
-        password
+        password,
       });
 
       if (error) {
         toast({
           title: "Sign in failed",
           description: error.message,
-          variant: "destructive"
+          variant: "destructive",
         });
       } else {
         // Clear demo mode when signing in
-        localStorage.removeItem('finance-tracker-demo-mode');
-        navigate('/');
+        localStorage.removeItem("finance-tracker-demo-mode");
+        navigate("/");
       }
     } catch (error) {
       toast({
         title: "An error occurred",
         description: "Please try again later.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -98,9 +100,9 @@ const Auth = () => {
     setDemoMode(true);
     toast({
       title: "Demo Mode Activated",
-      description: "You're now viewing the app with sample data."
+      description: "You're now viewing the app with sample data.",
     });
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -122,7 +124,9 @@ const Auth = () => {
 
         <Card className="bg-white shadow-elevated border-0">
           <CardHeader>
-            <CardTitle className="text-center text-card-foreground">Welcome</CardTitle>
+            <CardTitle className="text-center text-card-foreground">
+              Welcome
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
@@ -155,25 +159,27 @@ const Auth = () => {
                       placeholder="Enter your password"
                     />
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full bg-gradient-primary hover:opacity-90 transition-smooth"
                     disabled={loading}
                   >
-                    {loading ? 'Signing in...' : 'Sign In'}
+                    {loading ? "Signing in..." : "Sign In"}
                   </Button>
                 </form>
-                
+
                 <div className="relative my-6">
                   <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-2 text-muted-foreground">Or</span>
+                    <span className="bg-white px-2 text-muted-foreground">
+                      Or
+                    </span>
                   </div>
                 </div>
 
-                <Button 
+                <Button
                   type="button"
                   variant="outline"
                   className="w-full"
@@ -209,12 +215,12 @@ const Auth = () => {
                       minLength={6}
                     />
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full bg-gradient-primary hover:opacity-90 transition-smooth"
                     disabled={loading}
                   >
-                    {loading ? 'Creating account...' : 'Create Account'}
+                    {loading ? "Creating account..." : "Create Account"}
                   </Button>
                 </form>
 
@@ -223,11 +229,13 @@ const Auth = () => {
                     <span className="w-full border-t" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-2 text-muted-foreground">Or</span>
+                    <span className="bg-white px-2 text-muted-foreground">
+                      Or
+                    </span>
                   </div>
                 </div>
 
-                <Button 
+                <Button
                   type="button"
                   variant="outline"
                   className="w-full"
