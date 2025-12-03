@@ -40,8 +40,8 @@ Click "Try Demo Mode" on the login page to explore without signing up!
 
 ```bash
 # Clone the repository
-git clone https://github.com/Manonymoushah/my-money-map-67.git
-cd my-money-map-67
+git clone https://github.com/Manonymoushah/personal-finance-tracker.git
+cd personal-finance-tracker
 
 # Install dependencies
 npm install
