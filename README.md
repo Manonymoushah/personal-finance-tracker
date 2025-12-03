@@ -2,6 +2,8 @@
 
 A modern, responsive web application for tracking personal finances with income, expenses, and savings goals visualization.
 
+**🌐 Live Demo:** [https://personal-fi.netlify.app/](https://personal-fi.netlify.app/)
+
 ## ✨ Features
 
 - 📊 **Dashboard Overview** - View total balance, income, expenses, and savings at a glance
